@@ -8,4 +8,10 @@ class PageController {
 
     @GetMapping
     fun index() = "index"
+
+    @GetMapping("/issueapp")
+    fun issueApp() = "issueapp"
+
+    @GetMapping("signup")
+    fun signUp() = "signup"
 }
