@@ -1,1 +1,2 @@
-rootProject.name = "issueService"
+rootProject.name = "fastcampus-issue-service-complete"
+
