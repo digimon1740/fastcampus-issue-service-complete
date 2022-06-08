@@ -18,7 +18,7 @@ const UserEditForm = {
                     <span class="text-h6">프로필 이미지</span>
                     
                       <q-file
-                        name="avatarUrl"
+                        name="profileUrl"
                         v-model="file"
                         label="Pick files"
                         filled
@@ -27,7 +27,7 @@ const UserEditForm = {
                         >
                             <template v-slot:prepend>
                              <q-avatar >
-                                <img :src="user.avatarUrl">
+                                <img :src="user.profileUrl">
                                 </q-avatar>
                             </template>
                         </q-file>

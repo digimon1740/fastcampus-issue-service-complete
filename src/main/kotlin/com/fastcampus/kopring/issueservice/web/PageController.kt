@@ -1,4 +1,4 @@
-package com.fastcampus.kopring.issueservice
+package com.fastcampus.kopring.issueservice.web
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping
 @Controller
 class PageController {
 
-    @GetMapping
+    @GetMapping(value = ["", "/index"])
     fun index() = "index"
 
     @GetMapping("/issueapp")

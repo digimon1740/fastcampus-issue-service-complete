@@ -30,6 +30,7 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
 	// Others
+	implementation("io.github.microutils:kotlin-logging:1.12.5")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

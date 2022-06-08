@@ -81,7 +81,7 @@ const IssueEditForm = {
                     <q-item-section avatar style="width:100%">
                         <q-chip>
                             <q-avatar size="24px">
-                                <img :src="comment.avatarUrl">
+                                <img :src="comment.profileUrl">
                             </q-avatar>
                             {{comment.username}}
                         </q-chip>
