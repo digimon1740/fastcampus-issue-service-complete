@@ -1,8 +1,8 @@
 package com.fastcampus.kopring.issueservice.web
 
-import com.fastcampus.kopring.issueservice.dto.AuthUser
-import com.fastcampus.kopring.issueservice.dto.CommentRequest
-import com.fastcampus.kopring.issueservice.dto.CommentResponse
+import com.fastcampus.kopring.issueservice.config.AuthUser
+import com.fastcampus.kopring.issueservice.model.CommentRequest
+import com.fastcampus.kopring.issueservice.model.CommentResponse
 import com.fastcampus.kopring.issueservice.service.CommentService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

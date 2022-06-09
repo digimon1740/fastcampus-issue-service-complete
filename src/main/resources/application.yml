@@ -1,0 +1,4 @@
+# 유저서비스의 정보와같아야함
+jwt:
+  issuer: jara
+  secret: my-secret

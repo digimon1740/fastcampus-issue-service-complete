@@ -5,9 +5,9 @@ import com.fastcampus.kopring.issueservice.domain.CommentRepository
 import com.fastcampus.kopring.issueservice.domain.Issue
 import com.fastcampus.kopring.issueservice.domain.IssueRepository
 import com.fastcampus.kopring.issueservice.domain.enums.IssueStatus
-import com.fastcampus.kopring.issueservice.dto.CommentRequest
-import com.fastcampus.kopring.issueservice.dto.IssueRequest
 import com.fastcampus.kopring.issueservice.exception.NotFoundException
+import com.fastcampus.kopring.issueservice.model.CommentRequest
+import com.fastcampus.kopring.issueservice.model.IssueRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -22,7 +22,7 @@ class IssueService(
         issueRepository.findAllByStatusOrderByCreatedAtDesc(status)
 
     fun get(id: Long) =
-        issueRepository.findByIdOrNull(id) ?: throw NotFoundException("Issue was not found")
+        issueRepository.findByIdOrNull(id) ?: throw NotFoundException("이슈가 존재하지 않습니다")
 
     @Transactional
     fun create(userId: Long, request: IssueRequest): Issue {

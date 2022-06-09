@@ -1,4 +1,4 @@
-package com.fastcampus.kopring.issueservice.dto
+package com.fastcampus.kopring.issueservice.model
 
 import com.fastcampus.kopring.issueservice.domain.Comment
 

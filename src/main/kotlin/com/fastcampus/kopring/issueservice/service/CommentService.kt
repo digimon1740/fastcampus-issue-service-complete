@@ -2,7 +2,7 @@ package com.fastcampus.kopring.issueservice.service
 
 import com.fastcampus.kopring.issueservice.domain.Comment
 import com.fastcampus.kopring.issueservice.domain.CommentRepository
-import com.fastcampus.kopring.issueservice.dto.CommentRequest
+import com.fastcampus.kopring.issueservice.model.CommentRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

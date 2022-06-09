@@ -20,14 +20,14 @@ dependencies {
 	// Spring
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
 	// Jetbrains
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+	// JWT 인증
+	implementation("com.auth0:java-jwt:3.19.2")
 
 	// Others
 	implementation("io.github.microutils:kotlin-logging:1.12.5")

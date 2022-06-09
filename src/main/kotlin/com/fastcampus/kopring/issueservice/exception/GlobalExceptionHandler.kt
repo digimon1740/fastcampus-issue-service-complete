@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler {
 
     @ExceptionHandler(ServerException::class)
-    fun handleException(ex: ServerException) = ErrorResponse(status = ex.status, message = ex.message)
+    fun handleServerException(ex: ServerException) = ErrorResponse(status = ex.status, message = ex.message)
+
+    @ExceptionHandler(Exception::class)
+    fun handleException(ex: Exception) = ErrorResponse(status = 500, message = "Internal Server Error")
 
 }
