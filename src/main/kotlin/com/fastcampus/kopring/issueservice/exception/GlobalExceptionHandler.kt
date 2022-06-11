@@ -11,7 +11,10 @@ class GlobalExceptionHandler {
     private val logger = KotlinLogging.logger {}
 
     @ExceptionHandler(ServerException::class)
-    fun handleServerException(ex: ServerException) = ErrorResponse(status = ex.status, message = ex.message)
+    fun handleServerException(ex: ServerException): ErrorResponse {
+        logger.error { ex.message }
+        return ErrorResponse(status = ex.status, message = ex.message)
+    }
 
     @ExceptionHandler(TokenExpiredException::class)
     fun handleTokenExpiredException(ex: TokenExpiredException): ErrorResponse {
