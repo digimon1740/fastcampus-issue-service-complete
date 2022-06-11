@@ -5,6 +5,8 @@ import com.fastcampus.kopring.issueservice.domain.Issue
 import com.fastcampus.kopring.issueservice.domain.enums.IssuePriority
 import com.fastcampus.kopring.issueservice.domain.enums.IssueStatus
 import com.fastcampus.kopring.issueservice.domain.enums.IssueType
+import com.fasterxml.jackson.annotation.JsonFormat
+import java.time.LocalDateTime
 
 data class IssueRequest(
     val summary: String,
@@ -23,17 +25,26 @@ data class IssueResponse(
     val type: IssueType,
     val priority: IssuePriority,
     val status: IssueStatus,
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    val createdAt: LocalDateTime?,
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    val updatedAt: LocalDateTime?,
 ) {
     companion object {
-        operator fun invoke(issue: Issue) = IssueResponse(
-            id = issue.id!!,
-            comments = issue.comments.sortedByDescending(Comment::id).map(CommentResponse::of),
-            summary = issue.summary,
-            description = issue.description,
-            userId = issue.userId,
-            type = issue.type,
-            priority = issue.priority,
-            status = issue.status,
-        )
+        operator fun invoke(issue: Issue) =
+            with(issue) {
+                IssueResponse(
+                    id = id!!,
+                    comments = comments.sortedByDescending(Comment::id).map(CommentResponse::invoke),
+                    summary = summary,
+                    description = description,
+                    userId = userId,
+                    type = type,
+                    priority = priority,
+                    status = status,
+                    createdAt = createdAt,
+                    updatedAt = updatedAt
+                )
+            }
     }
 }

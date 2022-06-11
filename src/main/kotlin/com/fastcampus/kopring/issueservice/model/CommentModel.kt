@@ -11,21 +11,19 @@ data class CommentResponse(
     val issueId: Long,
     val userId: Long,
     val body: String,
-    // UserService 연동 대비
     val username: String? = null,
-    val profileUrl: String? = null,
 ) {
 
     companion object {
 
-        fun of(comment: Comment) = with(comment) {
+        operator fun invoke(comment: Comment) = with(comment) {
             CommentResponse(
                 id = id!!,
                 issueId = issue.id!!,
                 userId = userId,
                 body = body,
+                username = username,
             )
         }
-
     }
 }

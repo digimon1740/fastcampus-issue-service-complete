@@ -2,7 +2,6 @@ package com.fastcampus.kopring.issueservice.web
 
 import com.fastcampus.kopring.issueservice.config.AuthUser
 import com.fastcampus.kopring.issueservice.model.CommentRequest
-import com.fastcampus.kopring.issueservice.model.CommentResponse
 import com.fastcampus.kopring.issueservice.service.CommentService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -18,7 +17,7 @@ class CommentController(
         authUser: AuthUser,
         @PathVariable issueId: Long,
         @RequestBody request: CommentRequest,
-    ) = commentService.create(issueId, authUser.userId, request).let(CommentResponse::of)
+    ) = commentService.create(issueId, authUser.userId, authUser.username, request)
 
     @PutMapping("/{id}")
     fun edit(

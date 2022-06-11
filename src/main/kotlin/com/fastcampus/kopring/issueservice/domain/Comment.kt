@@ -14,8 +14,10 @@ class Comment(
     val issue: Issue,
 
     @Column
-    var userId: Long,
+    val userId: Long,
 
+    @Column
+    val username: String,
 
     @Column
     var body: String,
