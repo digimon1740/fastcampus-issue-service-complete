@@ -13,19 +13,19 @@ class GlobalExceptionHandler {
     @ExceptionHandler(ServerException::class)
     fun handleServerException(ex: ServerException): ErrorResponse {
         logger.error { ex.message }
-        return ErrorResponse(status = ex.status, message = ex.message)
+        return ErrorResponse(code = ex.code, message = ex.message)
     }
 
     @ExceptionHandler(TokenExpiredException::class)
     fun handleTokenExpiredException(ex: TokenExpiredException): ErrorResponse {
         logger.error { ex.message }
-        return ErrorResponse(status = 401, message = "Token Expired Error")
+        return ErrorResponse(code = 401, message = "Token Expired Error")
     }
 
     @ExceptionHandler(Exception::class)
     fun handleException(ex: Exception): ErrorResponse {
         logger.error { ex.message }
-        return ErrorResponse(status = 500, message = "Internal Server Error")
+        return ErrorResponse(code = 500, message = "Internal Server Error")
     }
 
 }
