@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1/api/issues/{issueId}/comments")
+@RequestMapping("/api/v1/issues/{issueId}/comments")
 class CommentController(
     private val commentService: CommentService,
 ) {

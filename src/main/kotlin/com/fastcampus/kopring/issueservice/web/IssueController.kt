@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1/api/issues")
+@RequestMapping("/api/v1/issues")
 class IssueController(
     private val issueService: IssueService,
 ) {

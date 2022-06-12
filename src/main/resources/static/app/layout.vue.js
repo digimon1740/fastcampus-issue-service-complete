@@ -30,9 +30,9 @@ const MyLayout = {
           </q-toolbar>
           
             <q-tabs align="center" class="bg-white text-primary">
-                <q-tab :label="layoutLabel.todo" icon="task"/>
-                <q-tab :label="layoutLabel.inProgress" icon="schedule"/>
-                <q-tab :label="layoutLabel.resolved" icon="check_circle"/>
+                <q-tab :label="layoutLabel.todo" @click="fetchIssues('TODO')" icon="task"/>
+                <q-tab :label="layoutLabel.inProgress" @click="fetchIssues('IN_PROGRESS')"  icon="schedule"/>
+                <q-tab :label="layoutLabel.resolved" @click="fetchIssues('RESOLVED')" icon="check_circle"/>
             </q-tabs>
         </q-header>
         <-- end top header toolbar -->
@@ -101,32 +101,36 @@ const MyLayout = {
             issueFormShowed: false,
             userEditFormShowed: false,
             clickedIssue: 0,
+            issues: [],
         }
     },
+    mounted() {
+        this.fetchIssues()
+    },
     methods: {
+        fetchIssues(_status) {
+            let status = _status || 'TODO'
+            let accessToken = localStorage.getItem('token')
+            window.axios.get(`/api/v1/issues?status=${status}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }).then(response => {
+                this.issues = response.data
+            })
+        },
         showWriteForm() {
             this.issueWriteFormShowed = true
-
         },
         showUserEditForm() {
             this.userEditFormShowed = true
-            console.log(11)
         },
         clickIssue(id) {
             this.issueFormShowed = true
-            this.clickedIssue = this.$props.issues.find(issue => {
+            this.clickedIssue = this.issues.find(issue => {
                 return issue.id === id
             })
         },
-        hello() {
-            axios.get('/hello')
-                .then(response => {
-                    console.log('hello!')
-                })
-                .catch(error => {
-                    console.log('catch!')
-                })
 
-        }
     }
 }

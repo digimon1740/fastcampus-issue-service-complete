@@ -17,7 +17,6 @@ const IssueList = {
                             
                             <q-card-section  v-if="issue.priority === 'LOW'" class="bg-green-4 text-white">
                                 <div class="text-h6">{{issue.summary}}</div>
-                                <div class="text-subtitle2">by {{issue.reporter}}</div>
                             </q-card-section>
                             
                     

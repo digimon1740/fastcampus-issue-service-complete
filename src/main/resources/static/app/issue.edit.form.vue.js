@@ -10,7 +10,7 @@ const IssueEditForm = {
             <div>
                 <span class="text-h6">리포터</span>
                 <div>
-                    {{issue.reporter}}
+                    {{reporter}}
                 </div>
             </div>
         </q-card-section>
@@ -124,20 +124,50 @@ const IssueEditForm = {
     },
 
     methods: {
-        save() {
+        save(_status) {
             if (!confirm('변경 사항을 저장하시겠습니까?')) {
                 return
             }
-            alert(this.$props.issue.id)
+
+            let accessToken = localStorage.getItem('token')
+            window.axios.put(`/api/v1/issues/${this.$props.issue.id}`,
+                this.$props.issue,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                }
+            ).then(response => {
+                if (!response.data) {
+                    alert('오류가 발생했습니다')
+                    return
+                }
+                if (response.data && response.data.code) {
+                    alert(response.data.message)
+                    return
+                }
+                this.issues = response.data
+            })
         },
         remove() {
             if (!confirm('이슈를 삭제하시겠습니까?')) {
                 return
             }
-            this.$props.issue.id
+
+            let accessToken = localStorage.getItem('token')
+            window.axios.delete(`/api/v1/issues/${this.$props.issue.id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                }
+            ).then(response => {
+                location.href = `/issueapp`
+            })
         },
         editComment(id) {
             this.editCommentId = id
+
         },
         deleteComment(id) {
             if (!confirm('삭제하시겠습니까?')) {

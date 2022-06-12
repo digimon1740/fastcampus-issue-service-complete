@@ -74,8 +74,8 @@ class AuthUserHandlerArgumentResolver(
 
 data class AuthUser(
     val userId: Long,
-    val profileUrl: String?,
     val username: String,
     val email: String,
+    val profileUrl: String? = null,
 )
 
