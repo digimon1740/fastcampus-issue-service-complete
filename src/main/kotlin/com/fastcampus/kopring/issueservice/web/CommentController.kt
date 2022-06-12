@@ -30,9 +30,10 @@ class CommentController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(
         authUser: AuthUser,
+        @PathVariable issueId: Long,
         @PathVariable id: Long
     ) {
-        commentService.delete(id, authUser.userId)
+        commentService.delete(issueId, id, authUser.userId)
     }
 
 }

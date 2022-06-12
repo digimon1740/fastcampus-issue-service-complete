@@ -67,12 +67,6 @@ const IssueWriteForm = {
 
     methods: {
         save() {
-            for (let attr in this.$props.typeLabel.priority) {
-                if (this.$props.typeLabel.priority[attr] === this.issue.priority) {
-                    this.issue.priority = attr
-                    break;
-                }
-            }
             let accessToken = localStorage.getItem('token')
             window.axios.post(`/api/v1/issues`,
                 this.issue,

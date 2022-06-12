@@ -77,6 +77,7 @@ const MyLayout = {
             v-model="issueFormShowed"
             :user="user"
             :issue="clickedIssue"
+            :reporter="reporter"
            :type-label="typeLabel"
             />
         <!-- end issue-edit-form -->
@@ -102,6 +103,7 @@ const MyLayout = {
             userEditFormShowed: false,
             clickedIssue: 0,
             issues: [],
+            reporter: '',
         }
     },
     mounted() {
@@ -130,7 +132,30 @@ const MyLayout = {
             this.clickedIssue = this.issues.find(issue => {
                 return issue.id === id
             })
+
+            this.fetchReporter(this.clickedIssue)
         },
+        fetchReporter(issue) {
+            let accessToken = localStorage.getItem('token')
+            let url = localStorage.getItem('userServiceUrl')
+            window.axios.get(`${url}/api/v1/users/${issue.userId}/username`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                }
+            ).then(response => {
+                if (!response.data) {
+                    alert('오류가 발생했습니다')
+                    return
+                }
+                if (response.data && response.data.code) {
+                    alert(response.data.message)
+                    return
+                }
+                this.reporter = response.data.reporter
+            })
+        }
 
     }
 }

@@ -47,7 +47,11 @@ class CommentService(
         }
 
     @Transactional
-    fun delete(id: Long, userId: Long) = commentRepository.deleteByIdAndUserId(id, userId)
+    fun delete(issueId: Long, id: Long, userId: Long) {
+        val issue = issueRepository.findByIdOrNull(issueId) ?: throw NotFoundException("이슈가 존재하지 않습니다")
+        val comment = commentRepository.findByIdAndUserId(id, userId)
+        issue.comments.remove(comment)
+    }
 
 
 }
