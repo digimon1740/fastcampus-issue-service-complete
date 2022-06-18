@@ -6,6 +6,7 @@ import com.fastcampus.kopring.issueservice.domain.IssueRepository
 import com.fastcampus.kopring.issueservice.exception.NotFoundException
 import com.fastcampus.kopring.issueservice.model.CommentRequest
 import com.fastcampus.kopring.issueservice.model.CommentResponse
+import com.fastcampus.kopring.issueservice.model.toResponse
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -28,22 +29,14 @@ class CommentService(
         )
 
         issue.comments.add(comment)
-        return commentRepository.save(comment).let {
-            CommentResponse(
-                id = it.id!!,
-                issueId = issueId,
-                userId = it.userId,
-                body = it.body,
-                username = it.username,
-            )
-        }
+        return commentRepository.save(comment).toResponse()
     }
 
     @Transactional
     fun edit(id: Long, userId: Long, request: CommentRequest): CommentResponse? =
         commentRepository.findByIdAndUserId(id, userId)?.run {
             body = request.body
-            CommentResponse(commentRepository.save(this))
+            commentRepository.save(this).toResponse()
         }
 
     @Transactional

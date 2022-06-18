@@ -12,18 +12,12 @@ data class CommentResponse(
     val userId: Long,
     val body: String,
     val username: String? = null,
-) {
+)
 
-    companion object {
-
-        operator fun invoke(comment: Comment) = with(comment) {
-            CommentResponse(
-                id = id!!,
-                issueId = issue.id!!,
-                userId = userId,
-                body = body,
-                username = username,
-            )
-        }
-    }
-}
+fun Comment.toResponse() = CommentResponse(
+    id = id!!,
+    issueId = issue.id!!,
+    userId = userId,
+    body = body,
+    username = username,
+)
