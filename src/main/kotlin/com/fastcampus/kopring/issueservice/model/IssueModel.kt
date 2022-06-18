@@ -35,7 +35,7 @@ data class IssueResponse(
             with(issue) {
                 IssueResponse(
                     id = id!!,
-                    comments = comments.sortedByDescending(Comment::id).map(CommentResponse::invoke),
+                    comments = comments.sortedByDescending(Comment::id).map(Comment::toResponse),
                     summary = summary,
                     description = description,
                     userId = userId,
