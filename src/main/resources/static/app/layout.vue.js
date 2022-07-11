@@ -5,7 +5,7 @@ const MyLayout = {
             <q-toolbar-title>
               JARA
             </q-toolbar-title>
-          <q-btn-dropdown stretch flat :label="layoutLabel.userName + layoutLabel.userNameSuffix">
+          <q-btn-dropdown stretch flat :label="user.username + layoutLabel.userNameSuffix">
                 <q-list>
                   <q-item-label header>{{$props.layoutLabel.myInfo}}</q-item-label>
                   <q-item clickable v-close-popup  @click="showUserEditForm()">
@@ -103,10 +103,12 @@ const MyLayout = {
             userEditFormShowed: false,
             clickedIssue: 0,
             issues: [],
+            user: null,
             reporter: '',
         }
     },
     mounted() {
+        this.fetchUser()
         this.fetchIssues()
     },
     methods: {
@@ -119,6 +121,22 @@ const MyLayout = {
                 }
             }).then(response => {
                 this.issues = response.data
+            })
+        },
+        fetchUser() {
+            let accessToken = localStorage.getItem('token')
+            let url = localStorage.getItem('userServiceUrl')
+            window.axios.get(`${url}/api/v1/users/me`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }).then(response => {
+                if (!response.data || response.data.code === 404) {
+                    location.href = '/'
+                }
+                this.user = response.data
+            }).catch(err => {
+                location.href = '/'
             })
         },
         showWriteForm() {

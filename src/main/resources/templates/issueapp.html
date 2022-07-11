@@ -22,7 +22,6 @@
         <q-layout>
             <my-layout
                     :layout-label="layoutLabel"
-                    :user="user"
                     :type-label="typeLabel"
             />
 
@@ -53,7 +52,6 @@
         data() {
             return {
                 layoutLabel: {
-                    userName: '맥그리거',
                     userNameSuffix: ' 님',
                     myInfo: '내정보',
                     userEdit: '사용자 정보 수정',
@@ -80,14 +78,6 @@
                         'IN_PROGRESS',
                         'RESOLVED',
                     ],
-                },
-                user: {
-                    id: 1,
-                    username: '조슈아',
-                    email: 'joshua@gmail.com',
-                    profileUrl: 'https://cdn.quasar.dev/img/avatar.png',
-                    createdAt: '2022-01-01 02:22:33',
-                    updatedAt: '2022-01-01 02:22:33',
                 },
             }
         }
