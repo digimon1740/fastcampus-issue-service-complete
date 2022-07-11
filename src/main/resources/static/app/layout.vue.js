@@ -16,7 +16,7 @@ const MyLayout = {
                       <q-item-label>{{$props.layoutLabel.userEdit}}</q-item-label> 
                     </q-item-section>
                   </q-item>
-                  <q-item clickable v-close-popup>
+                  <q-item clickable v-close-popup  @click="logout()">
                     <q-item-section avatar>
                       <q-avatar icon="logout" color="primary" text-color="white" />
                     </q-item-section>
@@ -176,6 +176,23 @@ const MyLayout = {
                     return
                 }
                 this.reporter = response.data.reporter
+            })
+        },
+        logout() {
+            let accessToken = localStorage.getItem('token')
+            let url = localStorage.getItem('userServiceUrl')
+            window.axios.delete(`${url}/api/v1/users/logout`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                }
+            ).then(response => {
+                if (response.data && response.data.code) {
+                    alert(response.data.message)
+                    return
+                }
+                location.href = '/'
             })
         }
 
