@@ -131,7 +131,11 @@ const MyLayout = {
                     Authorization: `Bearer ${accessToken}`
                 }
             }).then(response => {
-                if (!response.data || response.data.code === 404) {
+                if (!response.data) {
+                    location.href = '/'
+                }
+                if (response.data && response.data.code) {
+                    alert(response.data.message)
                     location.href = '/'
                 }
                 this.user = response.data
