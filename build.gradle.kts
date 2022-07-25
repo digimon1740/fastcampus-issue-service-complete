@@ -29,6 +29,12 @@ dependencies {
 	// JWT 인증
 	implementation("com.auth0:java-jwt:3.19.2")
 
+
+	// 회원 인증 서비스 연동을 위한 의존성
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
 	// Others
 	implementation("io.github.microutils:kotlin-logging:1.12.5")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
